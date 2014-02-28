@@ -40,7 +40,7 @@ def merge_paths_2(paths, search_dist=0):
             if i1 == i2:
                 continue
 
-            if dist(v1[-1], v2[1]) <= 30.1:
+            if dist(v1[-1], v2[1]) <= search_dist:
                 paths[i1] = v1 + v2
                 paths.pop(i2)
 
