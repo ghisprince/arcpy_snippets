@@ -73,8 +73,8 @@ def export_fc_to_csv(fc, out_csv):
 
     example
 
-        import da_snippets
-        da_snippets.export_fc_to_csv(r"c:\proj\fc1.shp", r"c:\proj\fc1.csv")
+        import geom_snippets
+        geom_snippets.export_fc_to_csv(r"c:\proj\fc1.shp", r"c:\proj\fc1.csv")
 
     output csv looks like this
 
@@ -90,14 +90,11 @@ def export_fc_to_csv(fc, out_csv):
     with open(out_csv, 'w') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',', lineterminator='\n')
 
-        with arcpy.da.SearchCursor(fc, 
+        with arcpy.da.SearchCursor(fc,
                                    field_names=("OID@","SHAPE@JSON")) as c:
             for row in c:
                 geom = json.loads(row[1])
                 for path in geom['paths']:
                     for pt in path:
-                        csvwriter.writerow([row[0]] + pt) 
+                        csvwriter.writerow([row[0]] + pt)
 
-
-if __name__ == "__main__":
-    export_fc_to_csv(r'\\qalab_server\pydata\v103\core\global\fgdb\curveData.gdb\linefeatures', r"c:\temp\tmp2.csv")
