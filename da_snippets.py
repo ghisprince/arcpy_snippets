@@ -53,14 +53,15 @@ def fc_geom_to_csv(fc, out_csv):
                     for pt in path:
                         csvwriter.writerow([row[0]] + pt)
 
+
 def csv_xy_to_fc(in_csv, fc, fields=(("val", "TEXT"),) ):
     """
-    Convert csv containing x,y,val into a gdb point fc.
+    Convert csv containing x,y,value into a point featureclass.
 
     example
 
         import da_snippets
-        da_snippets.csv_xy_to_fc(r"c:\proj\fc1.shp", r"c:\proj\fc1.csv")
+        da_snippets.csv_xy_to_fc(r"c:\stuff\data.txt", r"c:\stuff\fc1.csv", (("val1", "TEXT"),) )
 
     """
     sr = arcpy.SpatialReference("WGS 1984")
