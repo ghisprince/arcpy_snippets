@@ -56,7 +56,7 @@ def fc_geom_to_csv(fc, out_csv):
 
 def csv_xy_to_fc(in_csv, fc, fields=(("val", "TEXT"),) ):
     """
-    Convert csv containing x,y,value into a point featureclass.
+    Convert csv containing rows of x,y,val into a point featureclass.
 
     example
 
@@ -79,7 +79,7 @@ def csv_xy_to_fc(in_csv, fc, fields=(("val", "TEXT"),) ):
         with arcpy.da.InsertCursor(fc, field_names = (["SHAPE@XY"] +
                                            [i[0] for i in fields]) ) as cur:
             for row in csvreader:
-                pt = (float(row[0]), float(row[0]),)
+                pt = (float(row[0]), float(row[1]),)
                 cur.insertRow( [pt,] + row[2:] )
 
 
